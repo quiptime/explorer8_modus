@@ -16,4 +16,4 @@ it. Enable the module via the administer modules page.
 Administration
 ------------------------------------------------------------------------------
 1. In admin/user/permissions define who can administrate the module.
-2. Administer the module in admin/settings/explorer8_modus.
+2. Administer the module in admin/config/system/explorer8_modus.

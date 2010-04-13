@@ -1,9 +1,9 @@
 <?php
-// $Id: explorer8_modus.module, v 1.0 2009/07/20 19:37:34 quiptime $
+// $Id: explorer8_modus.module, v 1.0 2010/04/13 22:14:09 quiptime $
 
 /**
  * @file
- *
+ * 
  * With "Explorer8 mode" can be defined as the Internet Explorer 8 to display Web pages that Drupalinstallation.
  */
 
@@ -12,8 +12,8 @@
  */
 function explorer8_modus_help($path, $arg) {
   switch ($path) {
-    case 'admin/settings/explorer8_modus':
-      return t('With "Explorer 8 modus" can be defined as the Internet Explorer 8 to display Web pages that Drupalinstallation.');
+    case 'admin/config/system/explorer8_modus':
+      return t('With "Explorer8 modus" can be defined as the Internet Explorer 8 to display Web pages that Drupalinstallation.');
   }
 }
 
@@ -21,7 +21,7 @@ function explorer8_modus_help($path, $arg) {
  * Implement hook_init().
  */
 function explorer8_modus_init() {
-  _explorer8_modus_header();
+  explorer8_modus_header();
 }
 
 /**
@@ -41,7 +41,7 @@ function explorer8_modus_permission() {
  */
 function explorer8_modus_menu() {
   $items = array();
-  $items['admin/settings/explorer8_modus'] = array(
+  $items['admin/config/system/explorer8_modus'] = array(
     'title' => 'Internet Explorer 8 modus',
     'description' => 'Setting the document compatibility mode of the Internet Explorer 8th.',
     'page callback' => 'drupal_get_form',
@@ -54,14 +54,22 @@ function explorer8_modus_menu() {
 }
 
 /**
- * Help function.
+ * Set the meta tag.
  */
-function _explorer8_modus_header() {
+function explorer8_modus_header() {
   if (variable_get('explorer8_modus_setting', '') == 'IE=8') {
     return '';
   }
   else {
-    $data = '<meta http-equiv="X-UA-Compatible" content="' . variable_get('explorer8_modus_setting', 'IE=8') . '" />';
-    drupal_add_html_head($data);
+    // Set weight to make sure that 'X-UA-Compatible' have second tag position.
+    $element = array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'http-equiv' => 'X-UA-Compatible',
+        'content' => variable_get('explorer8_modus_setting', 'IE=8'),
+      ),
+      '#weight' => -999,
+    );
+    drupal_add_html_head($element, 'explorer8_modus_header');
   }
 }

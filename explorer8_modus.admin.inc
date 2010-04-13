@@ -1,9 +1,9 @@
 <?php
-// $Id: explorer8_modus.admin.inc, v 1.0 2009/07/20 19:39:11 quiptime Exp $
+// $Id: explorer8_modus.admin.inc, v 1.0 2009/07/20 19:39:11 quiptime $
 
 /**
  * @file
- *
+ * 
  * The module admin settings.
  */
 
@@ -11,13 +11,7 @@
  * Menu callback, called from explorer8_modus_menu().
  */
 function explorer8_modus_settings() {
-  $form['ie8_modus'] = array(
-    '#type' => 'fieldset',
-    '#title' => 'Settings',
-    '#description' => t('Please choose the explorer version for the document compatibility modus.<br />If "IE 8" is used then there is no entry of an additional HTML tag in the header.'),
-    '#collapsible' => FALSE,
-  );
-  $form['ie8_modus']['explorer8_modus_setting'] = array(
+  $form['explorer8_modus_setting'] = array(
     '#type' => 'radios',
     '#title' => t('Document compatibility modus'),
     '#options' => array(
@@ -28,6 +22,7 @@ function explorer8_modus_settings() {
       'IE=EmulateIE9' => t('Emulate IE 8.<br />Does the website a standard DOCTYPE indication, it appears in "IE8 mode, the other in Quirks mode (IE5 mode) are shown.'),
     ),
     '#default_value' => variable_get('explorer8_modus_setting', 'IE=8'),
+    '#description' => t('Please choose the explorer version for the document compatibility modus.<br />If "IE 8" is used then there is no entry of an additional HTML tag in the header.')
   );
   return system_settings_form($form);
 }
