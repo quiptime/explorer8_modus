@@ -7,4 +7,4 @@ version = VERSION
 core = 7.x
 files[] = explorer8_modus.module
 files[] = explorer8_modus.admin.inc
-version = "7.x-1.0"
+version = "7.x-1.x-dev"
